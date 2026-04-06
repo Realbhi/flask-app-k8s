@@ -23,7 +23,7 @@ app.use(
 );
 
 // Static UI
-app.use(express.static(path.join(__dirname, "../public")));
+app.use(express.static(path.join(__dirname, "/public")));
 
 // Friendly aliases  GET /locations?location=Goa  →  backend /api/locations/Goa
 const aliases = [

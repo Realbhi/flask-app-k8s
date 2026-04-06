@@ -1,0 +1,19 @@
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile-f
+    environment:
+      BACKEND_URL: http://trip-backend-service:5000
+    ports:
+      - "3000:3000"
+
+  trip-backend-service:
+    build:
+      context: .
+      dockerfile: Dockerfile-b
+    environment:
+      FLASK_APP: app.py
+    ports:
+      - "5000:5000"
+    
