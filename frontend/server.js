@@ -5,7 +5,7 @@ const path = require("path");
 const app = express();
 const PORT = 3000;
 
-const BACKEND_URL = process.env.BACKEND_URL || "http://trip-backend-service:5000";
+const BACKEND_URL = process.env.BACKEND_URL || "http://backend-svc:5000";
 console.log(`[frontend] proxying /api and /health to ${BACKEND_URL}`);
 
 // Proxy /api and /health straight to backend pod

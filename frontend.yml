@@ -15,10 +15,10 @@ spec:
     spec:
       containers:
         - name: trip-frontend
-          image: peacedockur/flask-app-k8s-frontend:latest
+          image: peacedockur/flask-app-k8s-frontend:v1  
           env:
             - name: BACKEND_URL
-              value: "http://trip-backend-service:5000"
+              value: "http://backend-svc:5000"
           livenessProbe:
             httpGet:
               path: /
