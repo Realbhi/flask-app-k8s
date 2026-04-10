@@ -4,6 +4,7 @@ metadata:
   name: ingress-flask-app
   namespace: trip-planner
 spec:
+  ingressClassName: nginx
   rules:
     - http:
         paths:

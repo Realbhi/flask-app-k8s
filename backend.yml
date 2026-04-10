@@ -16,6 +16,7 @@ spec:
       containers:
         - name: trip-backend
           image: peacedockur/flask-app-k8s-trip-backend-service:latest
+          imagePullPolicy: Always
           env:
             - name: FLASK_APP
               value: app.py
