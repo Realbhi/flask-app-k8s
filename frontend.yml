@@ -13,6 +13,20 @@ spec:
       labels:
         app: frontend
     spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: kubernetes.io/hostname
+                operator: In
+                values:
+                - kind-worker
+              - key: role
+                operator: In
+                values:
+                - frontend
+
       containers:
         - name: trip-frontend
           image: peacedockur/flask-app-k8s-frontend:v1  
@@ -39,7 +53,13 @@ spec:
             limits:
               cpu: '200m'
               memory: '256Mi'
-
+          volumeMounts:
+            - name: frontend-storage
+              mountPath: /data/frontend-vol
+      volumes:
+        - name: frontend-storage
+          persistentVolumeClaim:
+            claimName: frontend-pvc  
 
 ---
 

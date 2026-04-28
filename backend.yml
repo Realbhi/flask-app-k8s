@@ -13,6 +13,20 @@ spec:
       labels:
         app: backend 
     spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: kubernetes.io/hostname
+                operator: In
+                values:
+                - kind-worker2
+              - key: role
+                operator: In
+                values:
+                - backend
+
       containers:
         - name: trip-backend
           image: peacedockur/flask-app-k8s-trip-backend-service:latest
@@ -39,6 +53,13 @@ spec:
             limits:
               cpu: '200m'
               memory: '256Mi'
+          volumeMounts:
+            - name: backend-storage
+              mountPath: /data/backend-vol
+      volumes:
+        - name: backend-storage
+          persistentVolumeClaim:
+            claimName: backend-pvc
 
 ---
 
