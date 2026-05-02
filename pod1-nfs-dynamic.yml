@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Pod 
+metadata:
+  name: sample-nfs-pod
+  namespace: nfs-nfs
+spec:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: kubernetes.io/hostname
+            operator: In
+            values:
+            - kind-worker
+  containers:
+  - name: nginx-app
+    image: nginx
+    volumeMounts:
+    - name: nfs-backed-vol
+      mountPath: /data
+  volumes:
+  - name: nfs-backed-vol
+    persistentVolumeClaim:
+      claimName: pvc-nfs
